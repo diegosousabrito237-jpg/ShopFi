@@ -24,9 +24,19 @@ const db = getFirestore(app);
 
 const $ = id => document.getElementById(id);
 
-$("btnLogin").onclick = () => {
-  signInWithEmailAndPassword(auth, $("email").value, $("senha").value);
+$("btnLogin").onclick = async () => {
+  try {
+    await signInWithEmailAndPassword(
+      auth,
+      $("email").value,
+      $("senha").value
+    );
+  } catch (e) {
+    alert("Erro no login: " + e.message);
+    console.error(e);
+  }
 };
+
 
 $("sair").onclick = () => signOut(auth);
 
